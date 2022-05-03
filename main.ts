@@ -1,6 +1,6 @@
 pins.touchSetMode(TouchTarget.P1, TouchTargetMode.Capacitive)
 pins.touchSetMode(TouchTarget.P2, TouchTargetMode.Capacitive)
-radio.setGroup(69)
+radio.setGroup(92)
 radio.setTransmitSerialNumber(true)
 radio.setTransmitPower(7)
 let enabled = false
@@ -37,6 +37,10 @@ radio.onReceivedValue(function on_received_value(name: string, value: number) {
         d += 1
     }
     
+    if (name == "seri_cilso") {
+        radio.sendValue("ack", value)
+    }
+    
 })
 input.onButtonPressed(Button.A, function on_button_pressed_a() {
     
@@ -44,9 +48,6 @@ input.onButtonPressed(Button.A, function on_button_pressed_a() {
     console.log("hlasy B = " + b)
     console.log("hlasy C = " + c)
     console.log("hlasy D = " + d)
-})
-radio.onReceivedNumber(function on_received_number(receivedNumber: number) {
-    radio.sendNumber(receivedNumber)
 })
 input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
     
